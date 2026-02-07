@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TRUTH DARE 💜</title>
+    <style>
+        /* SAME LIQUID GLASS THEME */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #8A2BE2 0%, #C8A2C8 30%, #E6E6FA 60%, #F5F5F5 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 60px 40px;
+            border-radius: 30px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+            animation: shine 1.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        h1 {
+            color: #5a3f6d;
+            font-size: 2.2em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #7a5e9a;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #5a3f6d;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .answer-glass {
+            background: rgba(232, 245, 232, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            color: #2d5a3a;
+            font-size: 1.1em;
+            line-height: 1.5;
+            display: none;
+            box-shadow: 0 10px 30px rgba(72, 187, 120, 0.2);
+        }
+
+        .dare-glass {
+            background: rgba(255, 248, 240, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 20px 0;
+            color: #8a4f0a;
+            font-size: 1.2em;
+            line-height: 1.6;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+        }
+
+        .status {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 25px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glass-card">
+        <h1>💜</h1>
+        <p class="subtitle">Let's play a game ✨</p>
+
+        <!-- START SCREEN -->
+        <div id="startScreen">
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="glass-btn" id="truthBtn" onclick="playTruth()">💕 Truth</button>
+                <button class="glass-btn" id="dareBtn" onclick="playDare()">🔥 Dare</button>
+            </div>
+        </div>
+
+        <!-- TRUTH SCREEN -->
+        <div id="truthScreen" style="display: none;">
+            <br>
+            <div class="question-glass" id="truthQuestion">Loading truth...</div>
+            <div class="answer-glass" id="answerDisplay">
+                <strong>🌸 Your Answer:</strong><br>
+                <div id="answerText"></div>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: center;margin-top: 15px;">
+                <button class="glass-btn" onclick="backToStart()">← Back</button>
+            </div>
+        </div>
+
+        <!--  DARE SCREEN: Library Direct -->
+        <div id="dareScreen" style="display: none;">
+            <div class="dare-glass" id="libraryInstruction">
+                <strong>📚 Go to the library</strong><br>
+                You'll Get the Book Title after answering the next question right<br>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+                <button class="glass-btn" onclick="backToStart()">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TRUTH QUESTIONS
+        const truths = [
+            "💕 Do you miss me?",
+            "✨ What is the most memorable moment we shared?",
+            "🌸 Mera wo habit jo tujhe sabse pasand?",
+            "💜 How is your 'kiss day' going?",
+            "🌟 Hamara future kaisa dekhna chahti hai?"
+        ];
+
+        // FIRST KISS DATE PASSWORD
+        const firstKissDate = "23/11/2025" || "23112025" || "23.11.2025"; // Change this to your actual date!
+
+        function playTruth() {
+            hideAllScreens();
+            document.getElementById('truthScreen').style.display = 'block';
+            document.getElementById('truthBtn').disabled = true;
+            document.getElementById('dareBtn').disabled = true;
+
+            const randomTruth = truths[Math.floor(Math.random() * truths.length)];
+            document.getElementById('truthQuestion').innerHTML = randomTruth;
+
+            setTimeout(() => {
+                const answer = prompt("💕 Type your honest answer:");
+                if (answer && answer.trim() !== '') {
+                    showAnswer(answer);
+                } else {
+                    backToStart();
+                }
+            }, 3000);
+        }
+
+        function playDare() {
+            hideAllScreens();
+            document.getElementById('dareScreen').style.display = 'block';
+            document.getElementById('truthBtn').disabled = true;
+            document.getElementById('dareBtn').disabled = true;
+
+            // 5 SECOND DELAY → FIRST KISS PASSWORD DIALOG
+            setTimeout(() => {
+                const kissDate = prompt("💋 Enter the date of first kiss:");
+                if (kissDate === firstKissDate) {
+                    alert("✅ Perfect jaan! Library book check karo! 📚\nRed cover ke beech mein surprise hai ✨");
+                    backToStart();
+                } else {
+                    alert("❌ Wrong date! Pehle yaad karo humara first kiss! 😘");
+                    setTimeout(askFirstKissDate, 3000)
+                }
+            }, 5000);
+        }
+
+        function showAnswer(answer) {
+            document.getElementById('answerText').textContent = answer;
+            document.getElementById('answerDisplay').style.display = 'block';
+            setTimeout(backToStart, 3000);
+        }
+
+        function backToStart() {
+            hideAllScreens();
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('truthBtn').disabled = false;
+            document.getElementById('dareBtn').disabled = false;
+            document.getElementById('answerDisplay').style.display = 'none';
+        }
+
+        function hideAllScreens() {
+            document.getElementById('truthScreen').style.display = 'none';
+            document.getElementById('dareScreen').style.display = 'none';
+            document.getElementById('answerDisplay').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
