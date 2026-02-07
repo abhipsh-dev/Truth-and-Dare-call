@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>TRUTH DARE 💜</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth or Dare 💜</title>
     <style>
-        /* SAME LIQUID GLASS THEME */
         * {
             margin: 0;
             padding: 0;
@@ -12,259 +13,335 @@
         }
 
         body {
-            background: linear-gradient(135deg, #8A2BE2 0%, #C8A2C8 30%, #E6E6FA 60%, #F5F5F5 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
             min-height: 100vh;
+            /* NEW Purple-Lavender-Midnight Blue Palette */
+            background: linear-gradient(135deg,
+                    #6B46C1 0%,
+                    /* Purple */
+                    #C084FC 30%,
+                    /* Lavender */
+                    #A78BFA 50%,
+                    /* Lilac */
+                    #8B5CF6 70%,
+                    /* Purple */
+                    #1E293B 100%
+                    /* Midnight Blue */
+                );
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
         }
 
-        @keyframes gradientShift {
+        .glass-container {
+            width: 90vw;
+            max-width: 350px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(168, 139, 250, 0.4);
+            /* Lilac border */
+            box-shadow: 0 25px 45px rgba(107, 70, 193, 0.2);
+            /* Purple shadow */
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
 
             0%,
             100% {
-                background-position: 0% 50%;
+                transform: translateY(0px);
             }
 
             50% {
-                background-position: 100% 50%;
+                transform: translateY(-10px);
             }
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 60px 40px;
-            border-radius: 30px;
-            max-width: 420px;
-            width: 100%;
+        .title {
             text-align: center;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            position: relative;
-            overflow: hidden;
+            color: #F8FAFC;
+            /* Light lavender white */
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 12px rgba(30, 41, 59, 0.5);
+            /* Midnight blue shadow */
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            opacity: 0;
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .glass-card:hover::before {
-            opacity: 1;
-            animation: shine 1.5s ease-in-out;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        h1 {
-            color: #5a3f6d;
-            font-size: 2.2em;
-            font-weight: 300;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .subtitle {
-            color: #7a5e9a;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        .glass-btn {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #5a3f6d;
-            padding: 16px 32px;
-            font-size: 1.1em;
-            border-radius: 25px;
+        .btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: 500;
-            margin: 0 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .glass-btn:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        #truthBtn {
+            background: rgba(192, 132, 252, 0.8);
+            /* Lavender */
+            color: #1E293B;
+            /* Midnight blue text */
+            box-shadow: 0 8px 25px rgba(192, 132, 252, 0.5);
+            border: 1px solid rgba(168, 139, 250, 0.6);
         }
 
-        .glass-btn:disabled {
+        #truthBtn:hover {
+            background: rgba(192, 132, 252, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(192, 132, 252, 0.7);
+        }
+
+        #dareBtn {
+            background: rgba(107, 70, 193, 0.8);
+            /* Purple */
+            color: white;
+            box-shadow: 0 8px 25px rgba(107, 70, 193, 0.5);
+            border: 1px solid rgba(139, 92, 246, 0.6);
+        }
+
+        #dareBtn:hover {
+            background: rgba(107, 70, 193, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(107, 70, 193, 0.7);
+        }
+
+        .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
+            transform: none !important;
         }
 
-        .answer-glass {
-            background: rgba(232, 245, 232, 0.3);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(72, 187, 120, 0.3);
-            padding: 25px;
-            border-radius: 20px;
-            margin: 20px 0;
-            color: #2d5a3a;
-            font-size: 1.1em;
-            line-height: 1.5;
+        /* Truth Screen */
+        #truthScreen {
             display: none;
-            box-shadow: 0 10px 30px rgba(72, 187, 120, 0.2);
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .truth-answer {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(168, 139, 250, 0.4);
+            /* Lilac */
+            color: #F8FAFC;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            box-shadow: 0 15px 35px rgba(107, 70, 193, 0.3);
+        }
+
+        /* Dare Screen */
+        #dareScreen {
+            display: none;
+            text-align: center;
+            animation: slideIn 0.5s ease;
         }
 
         .dare-glass {
-            background: rgba(255, 248, 240, 0.4);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            padding: 35px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            margin: 20px 0;
-            color: #8a4f0a;
-            font-size: 1.2em;
+            padding: 2.5rem 2rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(168, 139, 250, 0.4);
+            /* Lilac */
+            color: #F8FAFC;
+            font-size: 1.1rem;
             line-height: 1.6;
-            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+            box-shadow: 0 20px 40px rgba(30, 41, 59, 0.4);
+            /* Midnight blue */
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .status {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 25px;
-            opacity: 0.8;
+        /* Responsive */
+        @media (max-width: 480px) {
+            .glass-container {
+                width: 95vw;
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.9rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatHeart 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
+
 </head>
 
 <body>
-    <div class="glass-card">
-        <h1>💜</h1>
-        <p class="subtitle">Let's play a game ✨</p>
+    <div class="glass-container">
+        <h1 class="title">Truth or Dare 💜</h1>
 
-        <!-- START SCREEN -->
-        <div id="startScreen">
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <button class="glass-btn" id="truthBtn" onclick="playTruth()">💕 Truth</button>
-                <button class="glass-btn" id="dareBtn" onclick="playDare()">🔥 Dare</button>
+        <!-- Main Buttons -->
+        <div class="buttons-container">
+            <button id="truthBtn" class="btn" onclick="playTruth()">💕 Truth</button>
+            <button id="dareBtn" class="btn" onclick="playDare()">🔥 Dare</button>
+        </div>
+
+        <!-- Truth Screen -->
+        <div id="truthScreen">
+            <div class="truth-answer" id="truthAnswer">
+                Click Truth to reveal secret! ✨
             </div>
         </div>
 
-        <!-- TRUTH SCREEN -->
-        <div id="truthScreen" style="display: none;">
-            <br>
-            <div class="question-glass" id="truthQuestion">Loading truth...</div>
-            <div class="answer-glass" id="answerDisplay">
-                <strong>🌸 Your Answer:</strong><br>
-                <div id="answerText"></div>
-            </div>
-            <div style="display: flex; gap: 12px; justify-content: center;margin-top: 15px;">
-                <button class="glass-btn" onclick="backToStart()">← Back</button>
-            </div>
-        </div>
-
-        <!--  DARE SCREEN: Library Direct -->
-        <div id="dareScreen" style="display: none;">
+        <!-- Dare Screen (Library + Final Message) -->
+        <div id="dareScreen">
             <div class="dare-glass" id="libraryInstruction">
-                <strong>📚 Go to the library</strong><br>
-                You'll Get the Book Title after answering the next question right<br>
-            </div>
-            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
-                <button class="glass-btn" onclick="backToStart()">← Back</button>
+                Click Dare for adventure! 🎯
             </div>
         </div>
     </div>
 
     <script>
-        // TRUTH QUESTIONS
-        const truths = [
-            "💕 Do you miss me?",
-            "✨ What is the most memorable moment we shared?",
-            "🌸 Mera wo habit jo tujhe sabse pasand?",
-            "💜 How is your 'kiss day' going?",
-            "🌟 Hamara future kaisa dekhna chahti hai?"
+        // Secret passwords (CHANGE THESE!)
+        const firstKissDate = "13092025" || "13/09/2025" || "13.09.2025"; 
+
+        // Truth answers array
+        const truthAnswers = [
+            "Tumhare saath har moment special hai 💜",
+            "Tum meri favorite person ho ❤️",
+            "Tumhare smile se mera din ban jata hai ✨",
+            "Main hamesha tumhare saath rahunga 💕",
+            "Tumhare bina life boring hai 😘",
+            "I miss you as hell baby girl 💌",
+            "I am comming to see you soon.. 🥰",
         ];
-
-        // FIRST KISS DATE PASSWORD
-        const firstKissDate = "23/11/2025" || "23112025" || "23.11.2025"; // Change this to your actual date!
-
-        function playTruth() {
-            hideAllScreens();
-            document.getElementById('truthScreen').style.display = 'block';
-            document.getElementById('truthBtn').disabled = true;
-            document.getElementById('dareBtn').disabled = true;
-
-            const randomTruth = truths[Math.floor(Math.random() * truths.length)];
-            document.getElementById('truthQuestion').innerHTML = randomTruth;
-
-            setTimeout(() => {
-                const answer = prompt("💕 Type your honest answer:");
-                if (answer && answer.trim() !== '') {
-                    showAnswer(answer);
-                } else {
-                    backToStart();
-                }
-            }, 3000);
-        }
-
-        function playDare() {
-            hideAllScreens();
-            document.getElementById('dareScreen').style.display = 'block';
-            document.getElementById('truthBtn').disabled = true;
-            document.getElementById('dareBtn').disabled = true;
-
-            // 5 SECOND DELAY → FIRST KISS PASSWORD DIALOG
-            setTimeout(() => {
-                const kissDate = prompt("💋 Enter the date of first kiss:");
-                if (kissDate === firstKissDate) {
-                    alert("✅ Perfect jaan! Library book check karo! 📚\nRed cover ke beech mein surprise hai ✨");
-                    backToStart();
-                } else {
-                    alert("❌ Wrong date! Pehle yaad karo humara first kiss! 😘");
-                    setTimeout(askFirstKissDate, 3000)
-                }
-            }, 5000);
-        }
-
-        function showAnswer(answer) {
-            document.getElementById('answerText').textContent = answer;
-            document.getElementById('answerDisplay').style.display = 'block';
-            setTimeout(backToStart, 3000);
-        }
-
-        function backToStart() {
-            hideAllScreens();
-            document.getElementById('startScreen').style.display = 'block';
-            document.getElementById('truthBtn').disabled = false;
-            document.getElementById('dareBtn').disabled = false;
-            document.getElementById('answerDisplay').style.display = 'none';
-        }
 
         function hideAllScreens() {
             document.getElementById('truthScreen').style.display = 'none';
             document.getElementById('dareScreen').style.display = 'none';
-            document.getElementById('answerDisplay').style.display = 'none';
+        }
+
+        function playTruth() {
+            hideAllScreens();
+
+            // Random truth answer
+            const randomAnswer = truthAnswers[Math.floor(Math.random() * truthAnswers.length)];
+            document.getElementById('truthAnswer').innerHTML = randomAnswer;
+
+            document.getElementById('truthScreen').style.display = 'block';
+
+            // Add floating heart
+            createFloatingHeart();
+        }
+
+        function playDare() {
+            hideAllScreens();
+
+            // Disable both buttons permanently after first dare
+            document.getElementById('truthBtn').disabled = true;
+            document.getElementById('dareBtn').disabled = true;
+
+            // Show library instruction
+            document.getElementById('libraryInstruction').innerHTML = `
+                Go to the LIBRARY<br>
+                Search for the book<br>
+                Open karo aur padho
+            `;
+
+            document.getElementById('dareScreen').style.display = 'block';
+
+            // 5 seconds baad first kiss question
+            setTimeout(askFirstKissDate, 4000);
+        }
+
+        function askFirstKissDate() {
+            const kissDate = prompt("💋 Humara first interaction kab tha?\n(Format: DDMMYYYY ya date number):");
+
+            if (kissDate === firstKissDate) {
+                // FINAL END SCREEN - Game complete!
+                document.getElementById('libraryInstruction').innerHTML = `
+                    💌 I love you baby girl 💜<br><br>
+                    Search for "Fundamental Mathematics For Water and Wastewater Treatment Plant Operator under 'Engineering Mathematics 620.00151'"<br>
+                    <br>
+                    Library mein milte hai...<br>
+                    See you there! ✨❤️
+                `;
+
+                // Success hearts
+                createFloatingHeart('💜');
+                setTimeout(() => createFloatingHeart('❤️'), 500);
+                setTimeout(() => createFloatingHeart('💕'), 1000);
+
+            } else {
+                alert("❌ Wrong date! Yaad karo humara first kiss! 😘\nHint: Special date!");
+                // Game continue - retry allowed
+                setTimeout(askFirstKissDate, 2000);
+            }
+        }
+
+        function createFloatingHeart(emoji = '💖') {
+            const heart = document.createElement('div');
+            heart.innerHTML = emoji;
+            heart.className = 'heart-float';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
         }
     </script>
 </body>
